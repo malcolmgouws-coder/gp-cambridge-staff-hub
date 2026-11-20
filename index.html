@@ -52,6 +52,12 @@ input::placeholder{color:#6B7482}
 .f1{transform:rotateY(0) translateZ(55px)}.f2{transform:rotateY(90deg) translateZ(55px)}.f3{transform:rotateY(180deg) translateZ(55px)}.f4{transform:rotateY(-90deg) translateZ(55px)}.f5{transform:rotateX(90deg) translateZ(55px)}.f6{transform:rotateX(-90deg) translateZ(55px)}
 .shinebox{position:relative;overflow:hidden}
 .shinebox::after{content:"";position:absolute;top:0;bottom:0;width:30%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:shine 5s ease-in-out infinite}
+.langswitch{display:inline-flex;border:2px solid rgba(255,255,255,.55);border-radius:6px;overflow:hidden}
+.langswitch button{font:700 14px/1 "Source Sans 3",sans-serif;letter-spacing:1px;padding:0 14px;min-height:40px;min-width:46px;border:0;background:transparent;color:#ffffff;cursor:pointer;transition:background .2s ease,color .2s ease}
+.langswitch button[aria-pressed="true"]{background:#C8A24A;color:#0C2340}
+.langswitch button:hover{background:rgba(255,255,255,.15)}
+.langswitch button[aria-pressed="true"]:hover{background:#C8A24A}
+body.lang-fade main,body.lang-fade>div{opacity:.6}
 @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
 </style>
 </head>
@@ -71,6 +77,7 @@ input::placeholder{color:#6B7482}
 <a class="toplink" href="#">Staff Calendar</a>
 <a class="toplink" href="#">Staff Directory</a>
 <a class="toplink" href="#">Help</a>
+<div class="langswitch" role="group" aria-label="Language / Ngôn ngữ"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="vi" aria-pressed="false">VI</button></div>
 <span style="width: 1px; height: 24px; background: rgba(255,255,255,.3)"></span>
 <a class="shinebox" href="#" style="background: #C8A24A; color: #0C2340; text-decoration: none; font-weight: 700; font-size: 15px; padding: 11px 20px; border-radius: 4px; min-height: 22px; display: inline-flex; align-items: center">Staff sign in</a>
 </nav>
@@ -288,13 +295,27 @@ input::placeholder{color:#6B7482}
       { title: 'Stationery Orders', desc: 'Order classroom supplies and check this month’s ordering deadline.', tag: 'OPERATIONS', cat: 'Operations', icon: I.pen, cta: 'PLACE AN ORDER' }
     ];
   function esc(t){return String(t).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
-  var state={q:'',cat:'All'};
+  var VI={"GRAND PARK · CAMBRIDGE BILINGUAL CAMPUS": "GRAND PARK · CƠ SỞ SONG NGỮ CAMBRIDGE", "Teachers' Hub · Primary": "Cổng Giáo viên · Tiểu học", "Staff Calendar": "Lịch công tác", "Staff Directory": "Danh bạ nhân viên", "Help": "Trợ giúp", "Staff sign in": "Đăng nhập", "Planning": "Kế hoạch", "Teaching & Learning": "Dạy và học", "Pastoral": "Chăm sóc học sinh", "Operations": "Vận hành", "Policies": "Chính sách", "PRIMARY TEACHERS' HUB": "CỔNG THÔNG TIN GIÁO VIÊN TIỂU HỌC", "Everything you need to teach well, in one place.": "Mọi thứ thầy cô cần để dạy tốt, ở cùng một nơi.", "Planning, practice, people and paperwork for every Primary teacher and teaching assistant at Grand Park.": "Kế hoạch, thực hành, con người và hồ sơ dành cho mọi giáo viên và trợ giảng Tiểu học tại Grand Park.", "Popular:": "Truy cập nhanh:", "This week's pacing": "Tiến độ tuần này", "My timetable": "Thời khóa biểu của tôi", "Book a room": "Đặt phòng", "Log behaviour": "Ghi nhận hành vi", "THIS WEEK": "TUẦN NÀY", "Week 15": "Tuần 15", "Tue 24 Nov · No school for students": "Thứ Ba 24/11 · Học sinh nghỉ học", "[Add staff meeting / duty note]": "[Thêm lịch họp / ghi chú trực]", "WHAT GUIDES US": "ĐIỀU ĐỊNH HƯỚNG CHÚNG TA", "Our values": "Giá trị cốt lõi", "Intelligence": "Trí tuệ", "Self-direction": "Tự chủ", "Creativity": "Sáng tạo", "Integrity": "Chính trực", "Compassion": "Nhân ái", "QUICK ACCESS": "TRUY CẬP NHANH", "Your toolkit": "Bộ công cụ", "Nothing matches that search yet. Try “pacing”, “policy” or “booking”.": "Chưa có kết quả phù hợp. Hãy thử “tiến độ”, “chính sách” hoặc “đặt phòng”.", "NOTICEBOARD": "BẢNG TIN", "Announcements": "Thông báo", "[Announcement title]": "[Tiêu đề thông báo]", "[One-line summary · posted by]": "[Tóm tắt một dòng · người đăng]", "ALL ANNOUNCEMENTS →": "TẤT CẢ THÔNG BÁO →", "CALENDAR": "LỊCH", "Key dates": "Ngày quan trọng", "NOV": "TH11", "No school for students": "Học sinh nghỉ học", "Tuesday · Week 15": "Thứ Ba · Tuần 15", "[MON]": "[TH]", "[Event name]": "[Tên sự kiện]", "[Day · time · place]": "[Ngày · giờ · địa điểm]", "FULL STAFF CALENDAR →": "XEM LỊCH CÔNG TÁC →", "GOOD PRACTICE SPOTLIGHT": "THỰC HÀNH TIÊU BIỂU", "Watch & learn": "Xem và học hỏi", "[Video title — e.g. a carpet routine that works]": "[Tiêu đề video — ví dụ: một nề nếp trên thảm hiệu quả]", "[Teacher · Stage · focus area]": "[Giáo viên · Stage · trọng tâm]", "ALL PRACTICE VIDEOS →": "TẤT CẢ VIDEO →", "BROWSE BY STAGE": "TÌM THEO KHỐI", "Find resources for your year group": "Tìm tài liệu cho khối lớp của bạn", "Grand Park Cambridge Bilingual Campus. For teachers and teaching assistants.": "Cơ sở Song ngữ Cambridge Grand Park. Dành cho giáo viên và trợ giảng.", "PLANNING": "KẾ HOẠCH", "PEOPLE & PRACTICE": "CON NGƯỜI & THỰC HÀNH", "OPERATIONS": "VẬN HÀNH", "Pacing Guides": "Phân phối chương trình", "Teacher Timetables": "Thời khóa biểu giáo viên", "Lesson Plans": "Giáo án", "Learning Carpet Ideas": "Ý tưởng hoạt động trên thảm", "Good Teaching Practice": "Thực hành giảng dạy tốt", "Peer Observations": "Dự giờ đồng nghiệp", "Behaviour Logs": "Sổ theo dõi hành vi", "Policies & Procedures": "Chính sách & Quy trình", "Room Booking": "Đặt phòng", "Stationery Orders": "Đặt văn phòng phẩm", "Need help with the hub? Contact [Hub admin name · email]": "Cần hỗ trợ? Liên hệ [Tên quản trị viên · email]", "For internal staff use only": "Chỉ dành cho nhân viên nội bộ", "Search the hub": "Tìm kiếm trên cổng", "Search pacing guides, policies, forms…": "Tìm phân phối chương trình, chính sách, biểu mẫu…"}, CARDVI={"Pacing Guides": ["Phân phối chương trình", "Tiến độ theo từng tuần cho mọi môn học, từ Stage 1 đến Stage 6.", "MỞ PHÂN PHỐI"], "Teacher Timetables": ["Thời khóa biểu giáo viên", "Thời khóa biểu lớp và bộ môn, lịch trực và dạy thay cho mọi giáo viên và trợ giảng.", "XEM THỜI KHÓA BIỂU"], "Lesson Plans": ["Giáo án", "Giáo án hằng tuần cho Tiếng Anh, Ngữ âm, Toán và Khoa học, sẵn sàng để điều chỉnh.", "MỞ GIÁO ÁN"], "Good Teaching Practice": ["Thực hành giảng dạy tốt", "Video ngắn minh họa: thu hút học sinh, quản lý hành vi, giờ học trên thảm và khơi mở bài học.", "XEM VIDEO"], "Behaviour Logs": ["Sổ theo dõi hành vi", "Ghi nhận sự việc, theo dõi xu hướng và lưu lại việc trao đổi với gia đình.", "GHI NHẬN"], "Peer Observations": ["Dự giờ đồng nghiệp", "Đăng ký dự giờ, dùng biểu mẫu chung và thêm phần phản tư của bạn.", "ĐĂNG KÝ / PHẢN TƯ"], "Learning Carpet Ideas": ["Ý tưởng hoạt động trên thảm", "Nề nếp, hoạt động khởi động và trò chơi thảo luận cặp đôi cho giờ học trên thảm thêm hấp dẫn.", "XEM Ý TƯỞNG"], "Policies & Procedures": ["Chính sách & Quy trình", "Sổ tay nhân viên, bảo vệ trẻ em, đánh giá và các quy trình hằng ngày.", "ĐỌC CHÍNH SÁCH"], "Room Booking": ["Đặt phòng", "Kiểm tra lịch trống và đặt thư viện, hội trường hoặc phòng tin học.", "ĐẶT PHÒNG"], "Stationery Orders": ["Đặt văn phòng phẩm", "Đặt đồ dùng lớp học và xem hạn đặt hàng của tháng này.", "ĐẶT HÀNG"]}, TAGVI={"PLANNING": "KẾ HOẠCH", "TEACHING": "GIẢNG DẠY", "PASTORAL": "CHĂM SÓC HS", "POLICIES": "CHÍNH SÁCH", "OPERATIONS": "VẬN HÀNH"}, TABVI={"All": "Tất cả", "Planning": "Kế hoạch", "Teaching": "Giảng dạy", "Pastoral": "Chăm sóc HS", "Operations": "Vận hành"};
+  var saved='en'; try{saved=localStorage.getItem('gp-hub-lang')||'en';}catch(e){}
+  var state={q:'',cat:'All',lang:saved==='vi'?'vi':'en'};
+  function tr(t){return state.lang==='vi'&&VI[t]?VI[t]:t;}
+  var skip={SCRIPT:1,STYLE:1};
+  function walk(node,fn){for(var c=node.firstChild;c;c=c.nextSibling){if(c.nodeType===3)fn(c);else if(c.nodeType===1&&!skip[c.tagName]&&c.id!=='cards'&&c.id!=='tabs'&&c.id!=='count')walk(c,fn);}}
+  function applyLang(){
+    document.documentElement.lang=state.lang;
+    walk(document.body,function(n){if(n.__en===undefined)n.__en=n.nodeValue;var k=n.__en.trim();if(!k)return;n.nodeValue=(state.lang==='vi'&&VI[k])?n.__en.replace(k,VI[k]):n.__en;});
+    var inp=document.getElementById('hubsearch');if(inp.__ph===undefined)inp.__ph=inp.getAttribute('placeholder');inp.setAttribute('placeholder',tr(inp.__ph));
+    document.querySelectorAll('.langswitch button').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-lang')===state.lang));});
+    try{localStorage.setItem('gp-hub-lang',state.lang);}catch(e){}
+  }
   var tabsEl=document.getElementById('tabs'),cardsEl=document.getElementById('cards'),countEl=document.getElementById('count'),emptyEl=document.getElementById('empty'),input=document.getElementById('hubsearch');
   function render(){
     var q=state.q.toLowerCase().trim();
-    var list=all.filter(function(c){return (state.cat==='All'||c.cat===state.cat)&&(!q||(c.title+' '+c.desc+' '+c.tag).toLowerCase().indexOf(q)!==-1);});
+    var vi=state.lang==='vi';
+    var shown=all.map(function(c){var v=CARDVI[c.title];return vi&&v?{title:v[0],desc:v[1],cta:v[2],tag:TAGVI[c.tag]||c.tag,icon:c.icon,cat:c.cat,en:c}:{title:c.title,desc:c.desc,cta:c.cta,tag:c.tag,icon:c.icon,cat:c.cat,en:c};});
+    var list=shown.filter(function(c){var hay=(c.title+' '+c.desc+' '+c.tag+' '+c.en.title+' '+c.en.desc).toLowerCase();return (state.cat==='All'||c.cat===state.cat)&&(!q||hay.indexOf(q)!==-1);});
     tabsEl.innerHTML=['All','Planning','Teaching','Pastoral','Operations'].map(function(t){var on=t===state.cat;
-      return '<button type="button" class="chip" data-cat="'+t+'" aria-pressed="'+on+'" style="font-family: inherit; font-size: 16px; font-weight: 700; padding: 12px 20px; min-height: 46px; border: 2px solid #0C2340; '+(on?'background: #0C2340; color: #ffffff;':'background: #ffffff; color: #0C2340;')+'">'+t+'</button>';}).join('');
+      return '<button type="button" class="chip" data-cat="'+t+'" aria-pressed="'+on+'" style="font-family: inherit; font-size: 16px; font-weight: 700; padding: 12px 20px; min-height: 46px; border: 2px solid #0C2340; '+(on?'background: #0C2340; color: #ffffff;':'background: #ffffff; color: #0C2340;')+'">'+(state.lang==='vi'?TABVI[t]:t)+'</button>';}).join('');
     cardsEl.innerHTML=list.map(function(c){return `<a class="card" href="#" style="display: flex; flex-direction: column; gap: 16px; background: #ffffff; border: 1px solid #D9DEE6; border-top: 4px solid #0C2340; padding: 28px 28px 24px; min-height: 250px; box-sizing: border-box">
 <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
 <span class="iconbox" style="width: 56px; height: 56px; background: #0C2340; display: flex; align-items: center; justify-content: center; flex: 0 0 auto">
@@ -306,12 +327,14 @@ input::placeholder{color:#6B7482}
 <span style="font-size: 17px; line-height: 1.5; color: #2B3440; flex: 1 1 auto">${esc(c.desc)}</span>
 <span class="cardopen" style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; letter-spacing: 1px; color: #0C2340">${esc(c.cta)}<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
 </a>`;}).join('');
-    countEl.textContent=list.length===all.length?'Showing all '+list.length+' areas':'Showing '+list.length+' of '+all.length+' areas';
+    countEl.textContent=state.lang==='vi'?(list.length===all.length?'Hiển thị tất cả '+list.length+' mục':'Hiển thị '+list.length+'/'+all.length+' mục'):(list.length===all.length?'Showing all '+list.length+' areas':'Showing '+list.length+' of '+all.length+' areas');
     emptyEl.hidden=list.length!==0;
   }
   tabsEl.addEventListener('click',function(e){var b=e.target.closest('button[data-cat]');if(b){state.cat=b.getAttribute('data-cat');render();}});
   input.addEventListener('input',function(){state.q=input.value;render();});
   document.getElementById('search').addEventListener('submit',function(e){e.preventDefault();document.getElementById('planning').scrollIntoView({behavior:'smooth'});});
+  document.querySelectorAll('.langswitch button').forEach(function(b){b.addEventListener('click',function(){state.lang=b.getAttribute('data-lang');applyLang();render();});});
+  applyLang();
   render();
 })();
 </script>
