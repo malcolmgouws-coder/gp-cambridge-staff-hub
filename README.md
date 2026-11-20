@@ -1,4 +1,4 @@
-# Grand Park Teachers' Hub – Primary
+# Grand Park Cambridge Teachers' Hub
 
 A one-page hub for Primary teachers and teaching assistants at Grand Park Cambridge Bilingual Campus.
 
