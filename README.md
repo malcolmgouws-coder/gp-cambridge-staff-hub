@@ -2,7 +2,7 @@
 
 A one-page hub for Primary teachers and teaching assistants at Grand Park Cambridge Bilingual Campus.
 
-**Live site:** https://malcolmgouws-coder.github.io/grand-park-cambridge-teachers-hub/
+**Live site:** https://malcolmgouws-coder.github.io/gp-cambridge-staff-hub/
 
 ## What's inside
 - Toolkit: Pacing Guides, Teacher Timetables, Lesson Plans, Good Teaching Practice, Behaviour Logs, Peer Observations, Learning Carpet Ideas, Policies & Procedures, Room Booking, Stationery Orders (filter + search)
