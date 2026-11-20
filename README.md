@@ -1,4 +1,4 @@
-# Grand Park Cambridge Teachers' Hub
+# GP Cambridge Staff Hub
 
 A one-page hub for Primary teachers and teaching assistants at Grand Park Cambridge Bilingual Campus.
 
