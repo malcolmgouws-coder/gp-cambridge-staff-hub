@@ -9,7 +9,7 @@
 <link rel="icon" href="assets/vinschool-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400&amp;family=Barlow+Condensed:wght@700&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap">
 <style>
 /* =========================================================
    GP Cambridge Staff Hub · "Ivory & Ink" design system
@@ -262,15 +262,15 @@ section[id],footer[id]{scroll-margin-top:96px}
 .stagepill:hover{color:var(--ink);background:linear-gradient(180deg,#F1E3BC,#D9BC74);border-color:transparent;transform:translateY(-3px)}
 .stagepill:hover svg{opacity:1;transform:translate(2px,-2px)}
 
-.cubewrap{perspective:800px;width:150px;height:150px;flex:0 0 auto;display:none}
-.cube{position:relative;width:110px;height:110px;margin:20px;transform-style:preserve-3d;animation:spincube 20s linear infinite}
+.cubewrap{perspective:700px;width:150px;height:150px;flex:0 0 auto;display:block;justify-self:center}
+.cube{position:relative;width:110px;height:110px;margin:20px;transform-style:preserve-3d;animation:spincube 12s linear infinite}
 .cube:hover{animation-play-state:paused}
-.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px;border:1px solid rgba(226,204,147,.55);
-  background:linear-gradient(160deg,#21457A,#081A31);box-shadow:inset 0 1px 0 rgba(255,255,255,.2);color:#fff;font-family:var(--serif);font-weight:500;font-size:44px;line-height:1}
-.face small{font-family:var(--sans);font-size:10px;letter-spacing:.2em;color:var(--gold-soft);font-weight:600;margin-bottom:4px}
-.f1{font-size:22px}
+.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid #C8A24A;background:rgba(12,35,64,.92);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 24px rgba(200,162,74,.12);color:#fff;font-family:'Barlow Condensed',var(--sans);font-weight:700;font-size:46px;line-height:1}
+.face small{font-family:var(--sans);font-size:13px;letter-spacing:2px;color:#C8A24A;font-weight:600}
+.f1{font-size:24px}
 .f1{transform:rotateY(0) translateZ(55px)}.f2{transform:rotateY(90deg) translateZ(55px)}.f3{transform:rotateY(180deg) translateZ(55px)}.f4{transform:rotateY(-90deg) translateZ(55px)}.f5{transform:rotateX(90deg) translateZ(55px)}.f6{transform:rotateX(-90deg) translateZ(55px)}
-@keyframes spincube{from{transform:rotateX(-20deg) rotateY(0)}to{transform:rotateX(-20deg) rotateY(360deg)}}
+@keyframes spincube{from{transform:rotateX(-22deg) rotateY(0)}to{transform:rotateX(-22deg) rotateY(360deg)}}
 
 /* ---------- footer ---------- */
 .foot{background:var(--midnight);color:var(--on-dark-2);margin-top:var(--s4);border-radius:var(--r-xl) var(--r-xl) 0 0;position:relative;overflow:hidden}
@@ -336,8 +336,8 @@ section[id],footer[id]{scroll-margin-top:96px}
 .stagepill:active{transform:translateY(1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 1px 0 #9C7A33}
 /* cube: per-face lighting + floating with ground shadow */
 .cubewrap{position:relative}
-.cubefloat{animation:floaty 7s ease-in-out infinite;transform-style:preserve-3d}
-.cubewrap::after{content:"";position:absolute;left:28px;right:28px;bottom:-4px;height:16px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);animation:groundpulse 7s ease-in-out infinite}
+.cubefloat{transform-style:preserve-3d}
+.cubewrap::after{content:"";position:absolute;left:24px;right:24px;bottom:-6px;height:18px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent)}
 @keyframes groundpulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(.82);opacity:.6}}
 .f2,.f4{filter:brightness(.8)}.f3{filter:brightness(.68)}.f5{filter:brightness(1.18)}
 /* hero visual: soft ground shadow under the floating weekly card */
