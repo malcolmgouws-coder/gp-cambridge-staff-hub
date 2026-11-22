@@ -9,7 +9,7 @@
 <link rel="icon" href="assets/vinschool-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap">
 <style>
 /* =========================================================
    GP Cambridge Staff Hub · "Ivory & Ink" design system
@@ -56,7 +56,7 @@ section[id],footer[id]{scroll-margin-top:96px}
 .h3{margin:0;font-family:var(--serif);font-weight:500;font-size:var(--step-2);line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
 .lead{color:var(--text-2);max-width:60ch;margin:0}
 .sechead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s5);margin-bottom:var(--s6)}
-.sechead > div:not(.segment){display:flex;flex-direction:column;gap:var(--s3)}
+.sechead > div:not(.segment):not(.segwrap){display:flex;flex-direction:column;gap:var(--s3)}
 .more{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;letter-spacing:.06em;color:var(--navy);text-decoration:none}
 .more svg{transition:transform var(--d2) var(--ease)}
 .more:hover svg{transform:translateX(4px)}
@@ -290,11 +290,72 @@ section[id],footer[id]{scroll-margin-top:96px}
 .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .js .reveal.in{opacity:1;transform:none}
 
+
+/* =========================================================
+   Final polish: light, depth, microinteractions (Design Mastery)
+   Key light from top-left, rim light, base thickness, ground shadow
+   ========================================================= */
+.skip{position:absolute;left:16px;top:-80px;z-index:100;padding:12px 18px;border-radius:12px;background:var(--gold);color:var(--ink);font-weight:600;text-decoration:none;transition:top var(--d2) var(--ease)}
+.skip:focus{top:12px;color:var(--ink)}
+/* 3D icon tiles */
+.i3d{background:radial-gradient(120% 95% at 28% 16%,#3163A0 0%,#17375F 42%,#0A1C35 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.38),inset 1px 0 0 rgba(255,255,255,.10),inset 0 -4px 0 rgba(0,0,0,.30),inset 0 -8px 14px rgba(0,0,0,.18),
+  0 1px 0 #0B1C33,0 3px 0 #081629,0 4px 1px rgba(0,0,0,.18),0 16px 26px -12px rgba(11,29,54,.65)}
+.i3d::after{content:"";position:absolute;left:14%;right:14%;bottom:-14px;height:10px;border-radius:50%;background:radial-gradient(closest-side,rgba(11,29,54,.32),transparent);filter:blur(1.5px);transition:transform var(--d3) var(--ease),opacity var(--d3) var(--ease);pointer-events:none}
+.i3d svg{filter:drop-shadow(0 1px 0 rgba(0,0,0,.5)) drop-shadow(0 3px 3px rgba(0,0,0,.35))}
+.card:hover .i3d{transform:translateZ(30px) translateY(-5px) rotateX(12deg) rotateY(-14deg)}
+.card:hover .i3d::after{transform:translateY(8px) scale(.75);opacity:.55}
+/* cards: top light edge + layered elevation */
+.card{box-shadow:inset 0 1px 0 #fff,var(--e2)}
+.card:hover{box-shadow:inset 0 1px 0 #fff,var(--e3)}
+.card:active{transform:translateY(-1px) scale(.99);transition-duration:90ms}
+.value,.panel,.date{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),var(--e2)}
+.v3{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),var(--e2)}
+.date{box-shadow:inset 0 1px 0 #fff,var(--e1)}
+.btn-gold:active,.searchbox button:active,.sheet .sheetcta:active{transform:scale(.97)}
+.popular a:active,.chip:active,.langswitch button:active{transform:scale(.96)}
+.iconbtn:active{transform:scale(.94)}
+.weekcard{box-shadow:inset 0 1px 0 #fff,var(--e3)}
+/* segmented filter with sliding indicator */
+.segwrap{position:relative;display:flex;flex-direction:row;padding:5px;border-radius:16px;background:var(--ivory-2);border:1px solid var(--line);box-shadow:inset 0 2px 4px rgba(11,29,54,.06);overflow-x:auto;scrollbar-width:none;max-width:100%;-webkit-overflow-scrolling:touch}
+.segwrap::-webkit-scrollbar{display:none}
+.segwrap .segment{position:relative;z-index:1;background:none;border:0;padding:0;border-radius:0;overflow:visible}
+.seg-ind{position:absolute;z-index:0;top:5px;left:5px;bottom:5px;width:0;border-radius:12px;background:var(--paper);box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(11,29,54,.08),0 8px 16px -8px rgba(11,29,54,.3);transition:transform .45s var(--ease),width .45s var(--ease)}
+.segwrap .chip[aria-pressed="true"]{background:transparent;box-shadow:none;color:var(--ink)}
+/* grade selection: glass slabs with gold 3D number tiles */
+.stagepill{justify-content:flex-start;gap:14px;padding:0 16px 0 10px;
+  background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.03));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 2px 0 rgba(0,0,0,.28),0 14px 26px -16px rgba(0,0,0,.8)}
+.stagepill svg.go{margin-left:auto}
+.gn{flex:0 0 auto;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-family:var(--serif);font-size:19px;font-weight:500;color:var(--ink);
+  background:radial-gradient(120% 95% at 30% 18%,#FBEFCF 0%,#DDBE70 50%,#A98132 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 -3px 0 rgba(0,0,0,.18),0 2px 0 #7A5E22,0 10px 16px -8px rgba(0,0,0,.7);transition:transform var(--d2) var(--ease),background var(--d2) ease,color var(--d2) ease}
+.gn svg{opacity:1;width:18px;height:18px}
+.stagepill:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 3px 0 #9C7A33,0 20px 32px -14px rgba(0,0,0,.75)}
+.stagepill:hover .gn{transform:translateY(-2px) rotate(-6deg);color:#fff;background:radial-gradient(120% 95% at 30% 18%,#3163A0,#17375F 45%,#0A1C35);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 2px 0 #061226,0 10px 16px -8px rgba(0,0,0,.6)}
+.stagepill:active{transform:translateY(1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 1px 0 #9C7A33}
+/* cube: per-face lighting + floating with ground shadow */
+.cubewrap{position:relative}
+.cubefloat{animation:floaty 7s ease-in-out infinite;transform-style:preserve-3d}
+.cubewrap::after{content:"";position:absolute;left:28px;right:28px;bottom:-4px;height:16px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);animation:groundpulse 7s ease-in-out infinite}
+@keyframes groundpulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(.82);opacity:.6}}
+.f2,.f4{filter:brightness(.8)}.f3{filter:brightness(.68)}.f5{filter:brightness(1.18)}
+/* hero visual: soft ground shadow under the floating weekly card */
+.herovis::after{content:"";position:absolute;left:4%;bottom:-18px;width:300px;max-width:80%;height:22px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.45),transparent);animation:groundpulse 8s ease-in-out infinite;pointer-events:none}
+/* minimum label sizes for legibility */
+.eyebrow,.card .tag,.weekcard .badge,.cal small{font-size:12px}
+.chipfloat small,.brand .bt small{font-size:11px}
+.fcol .fh{font-size:12px}
+.gpills{grid-template-columns:repeat(2,minmax(0,1fr))}
+.i3d::after{background:radial-gradient(closest-side,rgba(11,29,54,.22),transparent)}
+.popular a{min-height:44px}
+.langswitch{padding:0}.langswitch button{min-height:44px;min-width:46px;border-radius:11px}
+
 /* ---------- breakpoints (mobile first) ---------- */
 @media (min-width:600px){
   .vgrid{grid-template-columns:repeat(3,1fr)}
   .vgrid .value:last-child{grid-column:auto}
-  .gpills{grid-template-columns:repeat(3,1fr)}
+  .gpills{grid-template-columns:repeat(3,minmax(0,1fr))}
   .popular .sep{display:none}
 }
 @media (min-width:900px){
@@ -327,6 +388,27 @@ section[id],footer[id]{scroll-margin-top:96px}
   .navbar .searchlink{display:none}
 }
 @media (max-width:599px){
+  body{font-size:17px}
+  #heroTitle{font-size:clamp(2.35rem,9.6vw,3rem);line-height:1.05;letter-spacing:-.02em}
+  .herolead{font-size:1.06rem;line-height:1.6}
+  .hero{padding-bottom:var(--s8)}
+  .h2{font-size:clamp(1.9rem,8vw,2.2rem)}
+  .h3{font-size:1.6rem}
+  .sechead{margin-bottom:var(--s5)}
+  .values{padding:var(--s8) 0 var(--s7)}
+  .toolkit{padding:var(--s7) 0 var(--s8)}
+  .band,.grades{padding:var(--s8) 0}
+  .card{padding:22px;min-height:0;gap:12px}
+  .card .ct{font-size:1.45rem}
+  .card .cd{font-size:16px}
+  .searchbox input{font-size:16px}
+  .aurora .a3{display:none}
+  .aurora span{filter:blur(60px)}
+  .weekcard{animation:none}
+  .stagepill{min-height:60px;gap:10px;padding:0 10px 0 8px;font-size:15px}
+  .stagepill svg.go{display:none}
+  .gn{width:34px;height:34px;font-size:17px}
+  .herovis::after{display:none}
   .frame::before{transform:translate(10px,10px)}
   .herovis{padding-right:10px}
   .value{min-height:118px;gap:18px}
@@ -345,6 +427,7 @@ section[id],footer[id]{scroll-margin-top:96px}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <!-- shared gold gradient for icon strokes -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3E2B0"/><stop offset=".55" stop-color="#D7B868"/><stop offset="1" stop-color="#B38A35"/></linearGradient>
@@ -361,7 +444,7 @@ section[id],footer[id]{scroll-margin-top:96px}
 <div class="wrap">
 <header class="navbar">
 <a class="brand" href="#" aria-label="GP Cambridge Staff Hub home">
-<span class="logotile"><img src="assets/vinschool-logo.png" alt="Vinschool – Nơi ươm mầm tinh hoa"></span>
+<span class="logotile"><img src="assets/vinschool-logo.png" alt="Vinschool – Nơi ươm mầm tinh hoa" width="199" height="160"></span>
 <span class="bt"><small>VINSCHOOL · PRIMARY</small><span>GP Cambridge Staff Hub</span></span>
 </a>
 <nav class="mainnav" aria-label="Main">
@@ -393,7 +476,7 @@ section[id],footer[id]{scroll-margin-top:96px}
 </div>
 </div>
 
-<main>
+<main id="main" tabindex="-1">
 <!-- ================= HERO ================= -->
 <section class="hero" aria-labelledby="heroTitle">
 <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
@@ -419,7 +502,7 @@ section[id],footer[id]{scroll-margin-top:96px}
 
 <div class="herovis">
 <div class="frame">
-<div class="imgclip"><img class="kb" src="assets/campus-courtyard.jpg" alt="The Grand Park campus courtyard with its canopy shade structures, gardens and playground"></div>
+<div class="imgclip"><img class="kb" src="assets/campus-courtyard.jpg" srcset="assets/campus-courtyard-900.jpg 900w, assets/campus-courtyard.jpg 1600w" sizes="(min-width:1000px) 560px, 92vw" width="1600" height="1200" fetchpriority="high" decoding="async" alt="The Grand Park campus courtyard with its canopy shade structures, gardens and playground"></div>
 </div>
 <div class="chipfloat" aria-hidden="true">
 <span class="i3d sm"><svg viewBox="0 0 24 24" fill="none" stroke="url(#gold)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"></path><circle cx="17" cy="9" r="2.4"></circle><path d="M15.5 14.2c2.4-.3 4.4 1.2 5 4.3"></path></svg></span>
@@ -456,7 +539,7 @@ section[id],footer[id]{scroll-margin-top:96px}
 <div class="wrap">
 <div class="sechead reveal">
 <div><span class="eyebrow">QUICK ACCESS</span><h2 class="h2">Your toolkit</h2></div>
-<div id="tabs" class="segment" role="group" aria-label="Filter by area"></div>
+<div class="segwrap" id="segwrap"><span class="seg-ind" id="segInd" aria-hidden="true"></span><div id="tabs" class="segment" role="group" aria-label="Filter by area"></div></div>
 </div>
 <p id="count" aria-live="polite"></p>
 <div id="cards"></div>
@@ -508,18 +591,18 @@ section[id],footer[id]{scroll-margin-top:96px}
 <section id="pastoral" class="grades">
 <div class="wrap">
 <div class="gpanel reveal">
-<div class="cubewrap" aria-hidden="true"><div class="cube"><div class="face f1"><small>PRIMARY</small>Starters</div><div class="face f2"><small>GRADE</small>1</div><div class="face f3"><small>GRADE</small>2</div><div class="face f4"><small>GRADE</small>3</div><div class="face f5"><small>GRADE</small>4</div><div class="face f6"><small>GRADE</small>5</div></div></div>
+<div class="cubewrap" aria-hidden="true"><div class="cubefloat"><div class="cube"><div class="face f1"><small>PRIMARY</small>Starters</div><div class="face f2"><small>GRADE</small>1</div><div class="face f3"><small>GRADE</small>2</div><div class="face f4"><small>GRADE</small>3</div><div class="face f5"><small>GRADE</small>4</div><div class="face f6"><small>GRADE</small>5</div></div></div></div>
 <div class="gcopy" style="display:flex;flex-direction:column;gap:12px;position:relative;z-index:1">
 <span class="eyebrow">BROWSE BY GRADE</span>
 <h2>Find resources for your year group</h2>
 </div>
 <div class="gpills">
-<a class="stagepill first" href="https://drive.google.com/drive/folders/1q0YjPrBYoBALlL0stqrukqxgToPQ420a" target="_blank" rel="noopener">Primary Starters<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
-<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener">Grade 1<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
-<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener">Grade 2<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
-<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener">Grade 3<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
-<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener">Grade 4<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
-<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener">Grade 5<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a class="stagepill first" href="https://drive.google.com/drive/folders/1q0YjPrBYoBALlL0stqrukqxgToPQ420a" target="_blank" rel="noopener"><span class="gn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"></path></svg></span>Primary Starters<svg class="go" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener"><span class="gn" aria-hidden="true">1</span>Grade 1<svg class="go" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener"><span class="gn" aria-hidden="true">2</span>Grade 2<svg class="go" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener"><span class="gn" aria-hidden="true">3</span>Grade 3<svg class="go" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener"><span class="gn" aria-hidden="true">4</span>Grade 4<svg class="go" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a class="stagepill" href="https://drive.google.com/drive/folders/1gyDKusCC5biTCoZJfOvhfO8uDIKOm6hy" target="_blank" rel="noopener"><span class="gn" aria-hidden="true">5</span>Grade 5<svg class="go" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
 </div>
 </div>
 </div>
@@ -530,7 +613,7 @@ section[id],footer[id]{scroll-margin-top:96px}
 <footer id="operations" class="foot">
 <div id="policies" class="wrap fgrid">
 <div class="fbrand">
-<span class="logotile"><img src="assets/vinschool-logo.png" alt="Vinschool"></span>
+<span class="logotile"><img src="assets/vinschool-logo.png" alt="Vinschool" width="199" height="160" loading="lazy" decoding="async"></span>
 <span class="ft">GP Cambridge Staff Hub</span>
 <span style="font-size:15px;line-height:1.6;max-width:34ch">Grand Park Cambridge Bilingual Campus. For teachers and teaching assistants.</span>
 </div>
@@ -583,10 +666,12 @@ document.documentElement.classList.add('js');
   function esc(t){return String(t).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
   var VI={"VINSCHOOL · PRIMARY": "VINSCHOOL · TIỂU HỌC", "GP Cambridge Staff Hub": "Cổng Nhân viên Cambridge GP", "Staff Calendar": "Lịch công tác", "Staff Directory": "Danh bạ nhân viên", "Help": "Trợ giúp", "Staff sign in": "Đăng nhập", "Planning": "Kế hoạch", "Teaching & Learning": "Dạy và học", "Pastoral": "Chăm sóc học sinh", "Operations": "Vận hành", "Policies": "Chính sách", "GP CAMBRIDGE STAFF HUB": "CỔNG NHÂN VIÊN CAMBRIDGE GP", "Everything you need to teach well, in one place.": "Mọi thứ thầy cô cần để dạy tốt, ở cùng một nơi.", "Planning, practice, people and paperwork for every Primary teacher and teaching assistant at Grand Park.": "Kế hoạch, thực hành, con người và hồ sơ dành cho mọi giáo viên và trợ giảng Tiểu học tại Grand Park.", "Popular:": "Truy cập nhanh:", "This week's pacing": "Tiến độ tuần này", "My timetable": "Thời khóa biểu của tôi", "Book a room": "Đặt phòng", "Log behaviour": "Ghi nhận hành vi", "THIS WEEK": "TUẦN NÀY", "Week 15": "Tuần 15", "Tue 24 Nov · No school for students": "Thứ Ba 24/11 · Học sinh nghỉ học", "[Add staff meeting / duty note]": "[Thêm lịch họp / ghi chú trực]", "WHAT GUIDES US": "ĐIỀU ĐỊNH HƯỚNG CHÚNG TA", "Our values": "Giá trị cốt lõi", "Intelligence": "Trí tuệ", "Self-direction": "Tự chủ", "Creativity": "Sáng tạo", "Integrity": "Chính trực", "Compassion": "Nhân ái", "QUICK ACCESS": "TRUY CẬP NHANH", "Your toolkit": "Bộ công cụ", "Nothing matches that search yet. Try “pacing”, “policy” or “booking”.": "Chưa có kết quả phù hợp. Hãy thử “tiến độ”, “chính sách” hoặc “đặt phòng”.", "NOTICEBOARD": "BẢNG TIN", "Announcements": "Thông báo", "[Announcement title]": "[Tiêu đề thông báo]", "[One-line summary · posted by]": "[Tóm tắt một dòng · người đăng]", "ALL ANNOUNCEMENTS →": "TẤT CẢ THÔNG BÁO →", "CALENDAR": "LỊCH", "Key dates": "Ngày quan trọng", "NOV": "TH11", "No school for students": "Học sinh nghỉ học", "Tuesday · Week 15": "Thứ Ba · Tuần 15", "[MON]": "[TH]", "[Event name]": "[Tên sự kiện]", "[Day · time · place]": "[Ngày · giờ · địa điểm]", "FULL STAFF CALENDAR →": "XEM LỊCH CÔNG TÁC →", "GOOD PRACTICE SPOTLIGHT": "THỰC HÀNH TIÊU BIỂU", "Watch & learn": "Xem và học hỏi", "[Video title — e.g. a carpet routine that works]": "[Tiêu đề video — ví dụ: một nề nếp trên thảm hiệu quả]", "[Teacher · Stage · focus area]": "[Giáo viên · Stage · trọng tâm]", "ALL PRACTICE VIDEOS →": "TẤT CẢ VIDEO →", "BROWSE BY GRADE": "TÌM THEO KHỐI LỚP", "Grade 1": "Lớp 1", "Grade 2": "Lớp 2", "Grade 3": "Lớp 3", "Grade 4": "Lớp 4", "Grade 5": "Lớp 5", "Assessment & Baselines": "Đánh giá & Đầu vào", "Find resources for your year group": "Tìm tài liệu cho khối lớp của bạn", "Grand Park Cambridge Bilingual Campus. For teachers and teaching assistants.": "Cơ sở Song ngữ Cambridge Grand Park. Dành cho giáo viên và trợ giảng.", "PLANNING": "KẾ HOẠCH", "PEOPLE & PRACTICE": "CON NGƯỜI & THỰC HÀNH", "OPERATIONS": "VẬN HÀNH", "Pacing Guides": "Phân phối chương trình", "Teacher Timetables": "Thời khóa biểu giáo viên", "Lesson Plans": "Giáo án", "Learning Carpet Ideas": "Ý tưởng hoạt động trên thảm", "Good Teaching Practice": "Thực hành giảng dạy tốt", "Peer Observations": "Dự giờ đồng nghiệp", "Behaviour Logs": "Sổ theo dõi hành vi", "Policies & Procedures": "Chính sách & Quy trình", "Room Booking": "Đặt phòng", "Stationery Orders": "Đặt văn phòng phẩm", "Need help with the hub? Contact [Hub admin name · email]": "Cần hỗ trợ? Liên hệ [Tên quản trị viên · email]", "For internal staff use only": "Chỉ dành cho nhân viên nội bộ", "Search the hub": "Tìm kiếm trên cổng", "Search pacing guides, policies, forms…": "Tìm phân phối chương trình, chính sách, biểu mẫu…"}, CARDVI={"Pacing Guides": ["Phân phối chương trình", "Tiến độ theo tuần cho mọi môn học. Chọn khối lớp, rồi mở Planning.", "MỞ PHÂN PHỐI"], "Assessment & Baselines": ["Đánh giá & Đầu vào", "Kết quả đánh giá đầu vào và hồ sơ đánh giá. Chọn khối lớp, rồi mở Baselines.", "MỞ BASELINES"], "Teacher Timetables": ["Thời khóa biểu giáo viên", "Thời khóa biểu lớp và bộ môn, lịch trực và dạy thay cho mọi giáo viên và trợ giảng.", "XEM THỜI KHÓA BIỂU"], "Lesson Plans": ["Giáo án", "Giáo án hằng tuần cho mọi môn học. Chọn khối lớp, rồi mở Planning.", "MỞ GIÁO ÁN"], "Good Teaching Practice": ["Thực hành giảng dạy tốt", "Video ngắn minh họa: thu hút học sinh, quản lý hành vi, giờ học trên thảm và khơi mở bài học.", "XEM VIDEO"], "Behaviour Logs": ["Sổ theo dõi hành vi", "Ghi nhận sự việc và theo dõi xu hướng. Chọn khối lớp, rồi mở Trackers.", "GHI NHẬN"], "Peer Observations": ["Dự giờ đồng nghiệp", "Đăng ký dự giờ, dùng biểu mẫu chung và thêm phần phản tư của bạn.", "ĐĂNG KÝ / PHẢN TƯ"], "Learning Carpet Ideas": ["Ý tưởng hoạt động trên thảm", "Nề nếp, hoạt động khởi động và trò chơi thảo luận cặp đôi cho giờ học trên thảm thêm hấp dẫn.", "XEM Ý TƯỞNG"], "Policies & Procedures": ["Chính sách & Quy trình", "Sổ tay nhân viên, bảo vệ trẻ em, đánh giá và các quy trình hằng ngày.", "ĐỌC CHÍNH SÁCH"], "Room Booking": ["Đặt phòng", "Kiểm tra lịch trống và đặt thư viện, hội trường hoặc phòng tin học.", "ĐẶT PHÒNG"], "Stationery Orders": ["Đặt văn phòng phẩm", "Đặt đồ dùng lớp học và xem hạn đặt hàng của tháng này.", "ĐẶT HÀNG"]}, TAGVI={"PLANNING": "KẾ HOẠCH", "TEACHING": "GIẢNG DẠY", "PASTORAL": "CHĂM SÓC HS", "POLICIES": "CHÍNH SÁCH", "OPERATIONS": "VẬN HÀNH"}, TABVI={"All": "Tất cả", "Planning": "Kế hoạch", "Teaching": "Giảng dạy", "Pastoral": "Chăm sóc HS", "Operations": "Vận hành"};
   // translations for text added in the redesign
-  VI["View key dates"]="Xem ngày quan trọng"; VI["FOR"]="DÀNH CHO"; VI["Teachers & TAs"]="Giáo viên & Trợ giảng";
+  VI["View key dates"]="Xem ngày quan trọng"; VI["Skip to content"]="Bỏ qua đến nội dung"; VI["GRADE"]="LỚP"; VI["PRIMARY"]="TIỂU HỌC"; VI["FOR"]="DÀNH CHO"; VI["Teachers & TAs"]="Giáo viên & Trợ giảng";
+  var AVI={"Open menu":"Mở menu","Close menu":"Đóng menu","Search the hub":"Tìm kiếm trên cổng","Search":"Tìm kiếm","Play this week's good practice video":"Phát video thực hành tiêu biểu tuần này","GP Cambridge Staff Hub home":"Trang chủ Cổng Nhân viên Cambridge GP","This week":"Tuần này","Our values":"Giá trị cốt lõi","Main":"Điều hướng chính","Mobile menu":"Menu điều hướng","Utility links":"Liên kết tiện ích","Utility":"Tiện ích","Filter by area":"Lọc theo lĩnh vực"};
   var saved='en'; try{saved=localStorage.getItem('gp-hub-lang')||'en';}catch(e){}
   var state={q:'',cat:'All',lang:saved==='vi'?'vi':'en'};
   function tr(t){return state.lang==='vi'&&VI[t]?VI[t]:t;}
+  function trA(t){return state.lang==='vi'&&AVI[t]?AVI[t]:t;}
   // Blur Text heading (inspired by React Bits): words blur in one by one, in EN or VI
   var hero=document.getElementById('heroTitle'),heroEN=hero.textContent.trim();
   function splitHero(){var t=tr(heroEN);hero.setAttribute('aria-label',t);hero.innerHTML=t.split(' ').map(function(w,i){return '<span class="bw" aria-hidden="true" style="animation-delay:'+(0.15+i*0.07).toFixed(2)+'s">'+esc(w)+'</span>';}).join(' ');}
@@ -598,6 +683,9 @@ document.documentElement.classList.add('js');
     var inp=document.getElementById('hubsearch');if(inp.__ph===undefined)inp.__ph=inp.getAttribute('placeholder');inp.setAttribute('placeholder',tr(inp.__ph));
     document.querySelectorAll('.langswitch button').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-lang')===state.lang));});
     try{localStorage.setItem('gp-hub-lang',state.lang);}catch(e){}
+    document.querySelectorAll('[aria-label]').forEach(function(el){if(el.id==='heroTitle'||el.id==='menuBtn')return;if(el.__al===undefined)el.__al=el.getAttribute('aria-label');el.setAttribute('aria-label',trA(el.__al));});
+    if(typeof setMenu==='function')setMenu(sheet.classList.contains('open'),true);
+    document.title=tr('GP Cambridge Staff Hub');
     splitHero();
   }
   var tabsEl=document.getElementById('tabs'),cardsEl=document.getElementById('cards'),countEl=document.getElementById('count'),emptyEl=document.getElementById('empty'),input=document.getElementById('hubsearch');
@@ -617,8 +705,13 @@ document.documentElement.classList.add('js');
       '<span class="cta">'+esc(c.cta)+ARROW+'</span></a>';}).join('');
     countEl.textContent=state.lang==='vi'?(list.length===all.length?'Hiển thị tất cả '+list.length+' mục':'Hiển thị '+list.length+'/'+all.length+' mục'):(list.length===all.length?'Showing all '+list.length+' areas':'Showing '+list.length+' of '+all.length+' areas');
     emptyEl.hidden=list.length!==0;
+    moveInd();
   }
-  tabsEl.addEventListener('click',function(e){var b=e.target.closest('button[data-cat]');if(b){state.cat=b.getAttribute('data-cat');render();}});
+  var segwrap=document.getElementById('segwrap'),segInd=document.getElementById('segInd'),indReady=false;
+  function moveInd(){var a=tabsEl.querySelector('[aria-pressed="true"]');if(!a)return;if(!indReady)segInd.style.transition='none';segInd.style.width=a.offsetWidth+'px';segInd.style.transform='translateX('+a.offsetLeft+'px)';if(!indReady){void segInd.offsetWidth;segInd.style.transition='';indReady=true;}}
+  window.addEventListener('resize',function(){indReady=false;moveInd();});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){indReady=false;moveInd();});
+  tabsEl.addEventListener('click',function(e){var b=e.target.closest('button[data-cat]');if(b){state.cat=b.getAttribute('data-cat');render();var a=tabsEl.querySelector('[aria-pressed="true"]');if(a&&segwrap.scrollWidth>segwrap.clientWidth)segwrap.scrollTo({left:Math.max(0,a.offsetLeft-24),behavior:'smooth'});}});
   input.addEventListener('input',function(){state.q=input.value;render();});
   document.getElementById('search').addEventListener('submit',function(e){e.preventDefault();document.getElementById('planning').scrollIntoView({behavior:'smooth'});});
   document.querySelectorAll('.langswitch button').forEach(function(b){b.addEventListener('click',function(){state.lang=b.getAttribute('data-lang');applyLang();render();});});
@@ -633,8 +726,9 @@ document.documentElement.classList.add('js');
 
   // Mobile menu
   var menuBtn=document.getElementById('menuBtn'),sheet=document.getElementById('sheet');
-  function setMenu(open){sheet.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',String(open));menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');}
+  function setMenu(open,quiet){sheet.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',String(open));menuBtn.setAttribute('aria-label',trA(open?'Close menu':'Open menu'));if(open&&!quiet){var f=sheet.querySelector('a');if(f)f.focus();}}
   menuBtn.addEventListener('click',function(){setMenu(!sheet.classList.contains('open'));});
+  document.addEventListener('click',function(e){if(sheet.classList.contains('open')&&!sheet.contains(e.target)&&!menuBtn.contains(e.target))setMenu(false,true);});
   sheet.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&sheet.classList.contains('open')){setMenu(false);menuBtn.focus();}});
 
@@ -642,7 +736,7 @@ document.documentElement.classList.add('js');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{rootMargin:'0px 0px -8% 0px'});
     document.querySelectorAll('.reveal').forEach(function(el,i){el.style.transitionDelay=((i%5)*70)+'ms';io.observe(el);});
-    var links=document.querySelectorAll('.mainnav .menulink');
+    var links=document.querySelectorAll('.mainnav .menulink, .sheet a[href^="#"]');
     var spy=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var id=en.target.id;links.forEach(function(l){l.setAttribute('aria-current',String(l.getAttribute('href')==='#'+id));});}});},{rootMargin:'-45% 0px -50% 0px'});
     ['planning','teaching','pastoral','operations'].forEach(function(id){var el=document.getElementById(id);if(el)spy.observe(el);});
   } else { document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');}); }
